@@ -5,6 +5,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  url_launcher: 3.0.0
+
   flutter_gallery_assets:
     git:
       url: https://flutter.googlesource.com/gallery-assets

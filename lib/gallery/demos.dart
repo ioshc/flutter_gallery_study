@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'icons.dart';
 import 'package:flutter_gallery_study/demo/pesto_demo.dart';
 import 'package:flutter_gallery_study/demo/colors_demo.dart';
-import 'package:flutter_gallery_study/demo/images_demo.dart';
 import 'package:flutter_gallery_study/demo/material/buttons_demo.dart';
 import 'package:flutter_gallery_study/demo/cupertino/cupertino_activity_indicator_demo.dart';
-
+import 'package:flutter_gallery_study/demo/images_demo.dart';
 
 class GalleryDemo {
   const GalleryDemo({

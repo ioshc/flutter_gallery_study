@@ -156,7 +156,6 @@ class _CategoriesPage extends StatelessWidget {
 }
 
 class GalleryHome extends StatefulWidget {
-
   const GalleryHome({
     Key key,
     this.optionsPage,
@@ -169,7 +168,6 @@ class GalleryHome extends StatefulWidget {
 }
 
 class _GalleryHomeState extends State<GalleryHome> {
-
   GalleryDemoCategory _category;
 
   static Widget _topHomeLayout(Widget currentChild, List<Widget> previousChildren) {
@@ -187,22 +185,23 @@ class _GalleryHomeState extends State<GalleryHome> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final bool isDark = theme.brightness == Brightness.dark;
+    final MediaQueryData media = MediaQuery.of(context);
+    final bool centerHome = media.orientation == Orientation.portrait && media.size.height < 800.0;
     const Curve switchOutCurve =
         const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn);
     const Curve switchInCurve =
         const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn);
 
     return new Scaffold(
-      backgroundColor: _kFlutterBlue,
+      backgroundColor: isDark ? _kFlutterBlue : theme.primaryColor,
       body: new SafeArea(
         bottom: false,
         child: new Backdrop(
           backTitle: new Text('Options'),
           backLayer: widget.optionsPage,
-          frontTitle: new AnimatedSwitcher(
-            duration: _kFrontLayerSwitchDuration,
-            child: const Text('Flutter gallery'),
-          ),
+          frontTitle: new Text('Flutter gallery'),
           frontAction: new AnimatedSwitcher(
             duration: _kFrontLayerSwitchDuration,
             switchOutCurve: switchOutCurve,
@@ -210,17 +209,19 @@ class _GalleryHomeState extends State<GalleryHome> {
             child: _category == null
                 ? const _FlutterLogo()
                 : new IconButton(
-              icon: const BackButtonIcon(),
-              tooltip: 'Back',
-              onPressed: () => setState(() => _category = null),
-            ),
+                    icon: const BackButtonIcon(),
+                    tooltip: 'Back',
+                    onPressed: () => setState(() => _category = null),
+                  ),
           ),
-          frontHeading: new Container(height: 24.0),
+          frontHeading: new Container(
+            height: 24.0,
+          ),
           frontLayer: new AnimatedSwitcher(
             duration: _kFrontLayerSwitchDuration,
             switchOutCurve: switchOutCurve,
             switchInCurve: switchInCurve,
-            layoutBuilder: _topHomeLayout,
+            layoutBuilder: centerHome ? _centerHomeLayout : _topHomeLayout,
             child: new _CategoriesPage(
               categories: kAllGalleryDemoCategories,
               onCategoryTap: (GalleryDemoCategory category) {

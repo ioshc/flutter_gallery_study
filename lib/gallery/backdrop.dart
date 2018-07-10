@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 const double _kFrontHeadingHeight = 32.0; // front layer beveled rectangle
 const double _kFrontClosedHeight = 92.0; // front layer height when closed
 const double _kBackAppBarHeight = 56.0; // back layer (options) appbar height
 
+// The size of the front layer heading's left and right beveled corners.
 final Tween<BorderRadius> _kFrontHeadingBevelRadius = new BorderRadiusTween(
   begin: const BorderRadius.only(
     topLeft: const Radius.circular(12.0),
@@ -207,16 +209,43 @@ class _BackdropState extends State<Backdrop>
     super.dispose();
   }
 
+  double get _backdropHeight {
+    // Warning: this can be safely called from the event handlers but it may
+    // not be called at build time.
+//    final RenderBox renderBox = _backdropKey.currentContext.findRenderObject();
+//    return math.max(0.0, renderBox.size.height - _kBackAppBarHeight - _kFrontClosedHeight);
+    return 100.0;
+  }
+
+  void _handleDragUpdate(DragUpdateDetails details) {
+    _controller.value -= details.primaryDelta / (_backdropHeight ?? details.primaryDelta);
+  }
+
+  void _handleDragEnd(DragEndDetails details) {
+    if (_controller.isAnimating || _controller.status == AnimationStatus.completed)
+      return;
+
+    final double flingVelocity = details.velocity.pixelsPerSecond.dy / _backdropHeight;
+    if (flingVelocity < 0.0)
+      _controller.fling(velocity: math.max(2.0, -flingVelocity));
+    else if (flingVelocity > 0.0)
+      _controller.fling(velocity: math.min(-2.0, -flingVelocity));
+    else
+      _controller.fling(velocity: _controller.value < 0.5 ? -2.0 : 2.0);
+  }
+
   void _toggleFrontLayer() {
     final AnimationStatus status = _controller.status;
-    final bool isOpen = status == AnimationStatus.completed || status == AnimationStatus.forward;
+    final bool isOpen = status == AnimationStatus.completed ||
+        status == AnimationStatus.forward;
     _controller.fling(velocity: isOpen ? -2.0 : 2.0);
   }
 
   Widget _buildStack(BuildContext context, BoxConstraints constraints) {
+
     final Animation<RelativeRect> frontRelativeRect = new RelativeRectTween(
       begin: new RelativeRect.fromLTRB(
-          0.0, constraints.maxHeight - _kFrontHeadingHeight, 0.0, 0.0),
+          0.0, constraints.biggest.height - _kFrontHeadingHeight - _kFrontHeadingHeight, 0.0, 0.0),
       end: new RelativeRect.fromLTRB(0.0, _kBackAppBarHeight, 0.0, 0.0),
     ).animate(_controller);
 
@@ -238,6 +267,7 @@ class _BackdropState extends State<Backdrop>
               icon: new AnimatedIcon(
                 icon: AnimatedIcons.close_menu,
                 progress: _controller,
+                semanticLabel: 'Show close',
               ),
             ),
           ),
@@ -278,18 +308,22 @@ class _BackdropState extends State<Backdrop>
       ),
     ];
 
+    // The front "heading" is a (typically transparent) widget that's stacked on
+    // top of, and at the top of, the front layer. It adds support for dragging
+    // the front layer up and down and for opening and closing the front layer
+    // with a tap. It may obscure part of the front layer's topmost child.
     if (widget.frontHeading != null) {
       layers.add(
         new PositionedTransition(
           rect: frontRelativeRect,
           child: new ExcludeSemantics(
-            child: new Container(
+            child: Container(
               alignment: Alignment.topLeft,
               child: new GestureDetector(
                 behavior: HitTestBehavior.opaque,
                 onTap: _toggleFrontLayer,
-                onVerticalDragUpdate: null,
-                onVerticalDragEnd: null,
+                onVerticalDragUpdate: _handleDragUpdate,
+                onVerticalDragEnd: _handleDragEnd,
                 child: widget.frontHeading,
               ),
             ),
