@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'icons.dart';
-import 'package:flutter_gallery_study/demo/pesto_demo.dart';
-import 'package:flutter_gallery_study/demo/colors_demo.dart';
+import 'package:flutter_gallery_study/demo/all.dart';
 import 'package:flutter_gallery_study/demo/material/buttons_demo.dart';
 import 'package:flutter_gallery_study/demo/cupertino/cupertino_activity_indicator_demo.dart';
-import 'package:flutter_gallery_study/demo/images_demo.dart';
 
 class GalleryDemo {
   const GalleryDemo({
@@ -14,7 +12,7 @@ class GalleryDemo {
     @required this.category,
     @required this.routeName,
     @required this.buildRoute,
-  }) : assert(title != null),
+  })  : assert(title != null),
         assert(category != null),
         assert(routeName != null),
         assert(buildRoute != null);
@@ -90,6 +88,15 @@ List<GalleryDemo> _buildGalleryDemos() {
       buildRoute: (BuildContext context) => new ColorsDemo(),
     ),
     new GalleryDemo(
+      title: 'Typography',
+      subtitle: 'All of the predefined text styles',
+      icon: GalleryIcons.custom_typography,
+      category: _kStyle,
+      routeName: TypographyDemo.routeName,
+      buildRoute: (BuildContext context) => new TypographyDemo(),
+    ),
+
+    new GalleryDemo(
       title: 'Buttons',
       subtitle: 'Flat, raised, dropdown, and more',
       icon: GalleryIcons.generic_buttons,
@@ -102,8 +109,11 @@ List<GalleryDemo> _buildGalleryDemos() {
       icon: GalleryIcons.cupertino_progress,
       category: _kCupertinoComponents,
       routeName: CupertinoProgressIndicatorDemo.routeName,
-      buildRoute: (BuildContext context) => new CupertinoProgressIndicatorDemo(),
+      buildRoute: (BuildContext context) =>
+          new CupertinoProgressIndicatorDemo(),
     ),
+
+    // Media
     new GalleryDemo(
       title: 'Animated images',
       subtitle: 'GIF and WebP animations',
@@ -112,12 +122,21 @@ List<GalleryDemo> _buildGalleryDemos() {
       routeName: ImagesDemo.routeName,
       buildRoute: (BuildContext context) => new ImagesDemo(),
     ),
+    new GalleryDemo(
+      title: 'Video',
+      subtitle: 'Video playback',
+      icon: GalleryIcons.drive_video,
+      category: _kMedia,
+      routeName: VideoDemo.routeName,
+      buildRoute: (BuildContext context) => const VideoDemo(),
+    ),
   ];
 
   // Keep Pesto around for its regression test value. It is not included
   // in (release builds) the performance tests.
   assert(() {
-    galleryDemos.insert(0,
+    galleryDemos.insert(
+      0,
       new GalleryDemo(
         title: 'Pesto',
         subtitle: 'Simple recipe browser',
@@ -135,5 +154,16 @@ List<GalleryDemo> _buildGalleryDemos() {
 
 final List<GalleryDemo> kAllGalleryDemos = _buildGalleryDemos();
 
-final Set<GalleryDemoCategory> kAllGalleryDemoCategories =
-kAllGalleryDemos.map<GalleryDemoCategory>((GalleryDemo demo) => demo.category).toSet();
+final Set<GalleryDemoCategory> kAllGalleryDemoCategories = kAllGalleryDemos
+    .map<GalleryDemoCategory>((GalleryDemo demo) => demo.category)
+    .toSet();
+
+final Map<GalleryDemoCategory, List<GalleryDemo>> kGalleryCategoryToDemos =
+    new Map<GalleryDemoCategory, List<GalleryDemo>>.fromIterable(
+  kAllGalleryDemoCategories,
+  value: (dynamic category) {
+    return kAllGalleryDemos
+        .where((GalleryDemo demo) => demo.category == category)
+        .toList();
+  },
+);

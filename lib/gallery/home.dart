@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'backdrop.dart';
 import 'demos.dart';
 import 'dart:math' as math;
+import 'dart:developer';
 
 const String _kGalleryAssetsPackage = 'flutter_gallery_assets';
 const Color _kFlutterBlue = const Color(0xFF003D75);
@@ -155,6 +156,53 @@ class _CategoriesPage extends StatelessWidget {
   }
 }
 
+class _DemoItem extends StatelessWidget {
+  const _DemoItem({ Key key, this.demo }) : super(key: key);
+
+  final GalleryDemo demo;
+
+  void _launchDemo(BuildContext context) {
+    if (demo.routeName != null) {
+      Timeline.instantSync('Start Transition', arguments: <String, String>{
+        'from': '/',
+        'to': demo.routeName,
+      });
+      Navigator.pushNamed(context, demo.routeName);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Card(
+      child: new ListTile(
+        contentPadding: EdgeInsets.all(10.0),
+        title: new Text(demo.title),
+        subtitle: new Text(demo.subtitle),
+        leading: new Icon(demo.icon),
+        onTap: () {
+          _launchDemo(context);
+        },
+      ),
+    );
+  }
+}
+
+class _DemosPage extends StatelessWidget {
+  const _DemosPage(this.category);
+
+  final GalleryDemoCategory category;
+
+  @override
+  Widget build(BuildContext context) {
+    return new ListView(
+      padding: const EdgeInsets.only(top: 38.0),
+      children: kGalleryCategoryToDemos[category].map<Widget>((GalleryDemo demo) {
+        return new _DemoItem(demo: demo);
+      }).toList(),
+    );
+  }
+}
+
 class GalleryHome extends StatefulWidget {
   const GalleryHome({
     Key key,
@@ -222,7 +270,9 @@ class _GalleryHomeState extends State<GalleryHome> {
             switchOutCurve: switchOutCurve,
             switchInCurve: switchInCurve,
             layoutBuilder: centerHome ? _centerHomeLayout : _topHomeLayout,
-            child: new _CategoriesPage(
+            child: _category != null
+                ? new _DemosPage(_category)
+              : new _CategoriesPage(
               categories: kAllGalleryDemoCategories,
               onCategoryTap: (GalleryDemoCategory category) {
                 setState(() => _category = category);

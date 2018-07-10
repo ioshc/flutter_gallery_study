@@ -9,6 +9,7 @@ import 'home.dart';
 import 'options.dart';
 import 'themes.dart';
 import 'scales.dart';
+import 'demos.dart';
 
 class GalleryApp extends StatefulWidget {
 
@@ -26,6 +27,17 @@ class _GalleryAppState extends State<GalleryApp> {
 
   GalleryOptions _options;
   Timer _timeDilationTimer;
+
+  Map<String, WidgetBuilder> _buildRoutes() {
+    // For a different example of how to set up an application routing table
+    // using named routes, consider the example in the Navigator class documentation:
+    // https://docs.flutter.io/flutter/widgets/Navigator-class.html
+    return new Map<String, WidgetBuilder>.fromIterable(
+      kAllGalleryDemos,
+      key: (dynamic demo) => '${demo.routeName}',
+      value: (dynamic demo) => demo.buildRoute,
+    );
+  }
 
   @override
   void initState() {
@@ -99,6 +111,7 @@ class _GalleryAppState extends State<GalleryApp> {
       showPerformanceOverlay: _options.showPerformanceOverlay,
       checkerboardOffscreenLayers: _options.showOffscreenLayersCheckerboard,
       checkerboardRasterCacheImages: _options.showRasterCacheImagesCheckerboard,
+      routes: _buildRoutes(),
       builder: (BuildContext context, Widget child) {
         return new Directionality(
           textDirection: _options.textDirection,

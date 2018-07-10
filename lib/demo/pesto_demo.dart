@@ -7,6 +7,18 @@ class PestoDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Text('PestoDemo');
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('Typography'),
+      ),
+      body: new ListView(
+        children: <Widget>[
+          new Card(
+            color: Colors.blueAccent,
+            child: new Text('Typography'),
+          )
+        ],
+      ),
+    );
   }
 }
