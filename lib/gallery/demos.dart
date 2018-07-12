@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'icons.dart';
 import 'package:flutter_gallery_study/demo/all.dart';
 import 'package:flutter_gallery_study/demo/material/buttons_demo.dart';
-import 'package:flutter_gallery_study/demo/cupertino/cupertino_activity_indicator_demo.dart';
 
 class GalleryDemo {
   const GalleryDemo({
@@ -104,6 +103,8 @@ List<GalleryDemo> _buildGalleryDemos() {
       routeName: ButtonsDemo.routeName,
       buildRoute: (BuildContext context) => new ButtonsDemo(),
     ),
+
+    //Cupertino
     new GalleryDemo(
       title: 'Activity Indicator',
       icon: GalleryIcons.cupertino_progress,
@@ -111,6 +112,62 @@ List<GalleryDemo> _buildGalleryDemos() {
       routeName: CupertinoProgressIndicatorDemo.routeName,
       buildRoute: (BuildContext context) =>
           new CupertinoProgressIndicatorDemo(),
+    ),
+    new GalleryDemo(
+      title: 'Buttons',
+      icon: GalleryIcons.generic_buttons,
+      category: _kCupertinoComponents,
+      routeName: CupertinoButtonsDemo.routeName,
+      buildRoute: (BuildContext context) =>
+      new CupertinoButtonsDemo(),
+    ),
+    new GalleryDemo(
+      title: 'Pickers',
+      icon: GalleryIcons.event,
+      category: _kCupertinoComponents,
+      routeName: CupertinoPickerDemo.routeName,
+      buildRoute: (BuildContext context) =>
+      new CupertinoPickerDemo(),
+    ),
+    new GalleryDemo(
+      title: 'Sliders',
+      icon: GalleryIcons.sliders,
+      category: _kCupertinoComponents,
+      routeName: CupertinoSliderDemo.routeName,
+      buildRoute: (BuildContext context) =>
+      new CupertinoSliderDemo(),
+    ),
+    new GalleryDemo(
+      title: 'Switches',
+      icon: GalleryIcons.cupertino_switch,
+      category: _kCupertinoComponents,
+      routeName: CupertinoSwitchDemo.routeName,
+      buildRoute: (BuildContext context) =>
+      new CupertinoSwitchDemo(),
+    ),
+    new GalleryDemo(
+      title: 'Pull to refresh',
+      icon: GalleryIcons.cupertino_pull_to_refresh,
+      category: _kCupertinoComponents,
+      routeName: CupertinoRefreshControlDemo.routeName,
+      buildRoute: (BuildContext context) =>
+      new CupertinoRefreshControlDemo(),
+    ),
+    new GalleryDemo(
+      title: 'Dialogs',
+      icon: GalleryIcons.dialogs,
+      category: _kCupertinoComponents,
+      routeName: CupertinoDialogsDemo.routeName,
+      buildRoute: (BuildContext context) =>
+      new CupertinoDialogsDemo(),
+    ),
+    new GalleryDemo(
+      title: 'Navigation',
+      icon: GalleryIcons.dialogs,
+      category: _kCupertinoComponents,
+      routeName: CupertinoNavigationDemo.routeName,
+      buildRoute: (BuildContext context) =>
+      new CupertinoNavigationDemo(),
     ),
 
     // Media

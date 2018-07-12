@@ -177,7 +177,7 @@ class _DemoItem extends StatelessWidget {
       child: new ListTile(
         contentPadding: EdgeInsets.all(10.0),
         title: new Text(demo.title),
-        subtitle: new Text(demo.subtitle),
+        subtitle: demo.subtitle != null ? new Text(demo.subtitle) : null,
         leading: new Icon(demo.icon),
         onTap: () {
           _launchDemo(context);
