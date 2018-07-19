@@ -8,3 +8,7 @@ export 'sliders_demo.dart';
 export 'selection_controls_demo.dart';
 export 'progress_indicator_demo.dart';
 export 'modal_bottom_sheet.dart';
+export 'menu_demo.dart';
+export 'search_demo.dart';
+export 'drawer_demo.dart';
+export 'grid_demo.dart';

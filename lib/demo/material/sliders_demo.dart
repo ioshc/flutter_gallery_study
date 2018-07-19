@@ -4,7 +4,7 @@ class SlidersDemo extends StatefulWidget {
   static const String routeName = 'material/sliders';
 
   @override
-  _SlidersDemoState createState() => _SlidersDemoState();
+  _SlidersDemoState createState() => new _SlidersDemoState();
 }
 
 class _SlidersDemoState extends State<SlidersDemo> {

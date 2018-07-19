@@ -176,6 +176,38 @@ List<GalleryDemo> _buildGalleryDemos() {
       routeName: ModalBottomSheetDemo.routeName,
       buildRoute: (BuildContext context) => new ModalBottomSheetDemo(),
     ),
+    new GalleryDemo(
+      title: 'Menus',
+      icon: GalleryIcons.menu,
+      category: _kMaterialComponents,
+      routeName: MenuButtonDemo.routeName,
+      buildRoute: (BuildContext context) => new MenuButtonDemo(),
+    ),
+    new GalleryDemo(
+      title: 'Search',
+      subtitle: 'Expandable search',
+      icon: Icons.search,
+      category: _kMaterialComponents,
+      routeName: SearchDemo.routeName,
+      buildRoute: (BuildContext context) => new SearchDemo(),
+    ),
+    new GalleryDemo(
+      title: 'Navigation drawer',
+      subtitle: 'Navigation drawer with standard header',
+      icon: Icons.menu,
+      category: _kMaterialComponents,
+      routeName: DrawerDemo.routeName,
+      buildRoute: (BuildContext context) => new DrawerDemo(),
+    ),
+    new GalleryDemo(
+      title: 'Grid',
+      subtitle: 'Row and column layout',
+      icon: Icons.grid_on,
+      category: _kMaterialComponents,
+      routeName: GridDemo.routeName,
+      buildRoute: (BuildContext context) => new GridDemo(),
+    ),
+
 
     //Cupertino
     new GalleryDemo(
