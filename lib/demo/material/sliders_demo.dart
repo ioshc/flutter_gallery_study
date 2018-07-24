@@ -45,6 +45,7 @@ class _SlidersDemoState extends State<SlidersDemo> {
                 children: <Widget>[
                   new Slider(
                     value: 0.2,
+                    onChanged: null,
                   ),
                   new Text('Disabled'),
                 ],

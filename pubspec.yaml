@@ -4,7 +4,7 @@ description: A new Flutter application.
 dependencies:
   flutter:
     sdk: flutter
-
+  intl: 0.15.6
   url_launcher: 3.0.0
   video_player: 0.5.1
 

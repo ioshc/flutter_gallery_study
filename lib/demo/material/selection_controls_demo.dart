@@ -142,9 +142,9 @@ class _SelectionControlsDemo extends State<SelectionControlsDemo> {
         new Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            new Radio(value: true, groupValue: _radioValue),
-            new Radio(value: false, groupValue: _radioValue),
-            new Radio(value: null, groupValue: _radioValue),
+            new Radio(value: true, groupValue: _radioValue, onChanged: null,),
+            new Radio(value: false, groupValue: _radioValue, onChanged: null,),
+            new Radio(value: null, groupValue: _radioValue, onChanged: null,),
           ],
         )
       ],
