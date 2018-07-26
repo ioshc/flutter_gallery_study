@@ -21,3 +21,5 @@ export 'leave_behind_demo.dart';
 export 'list_demo.dart';
 export 'icons_demo.dart';
 export 'two_level_list_demo.dart';
+export 'expansion_panel_demo.dart';
+export 'dialogs_demo.dart';

@@ -95,7 +95,17 @@ List<GalleryDemo> _buildGalleryDemos() {
       buildRoute: (BuildContext context) => new TypographyDemo(),
     ),
 
+
+
     //Material
+    new GalleryDemo(
+      title: 'Dialogs',
+      subtitle: 'Simple, alert, and fullscreen',
+      icon: GalleryIcons.dialogs,
+      category: _kMaterialComponents,
+      routeName: DialogsDemo.routeName,
+      buildRoute: (BuildContext context) => new DialogsDemo(),
+    ),
     new GalleryDemo(
       title: 'Buttons',
       subtitle: 'Flat, raised, dropdown, and more',
@@ -279,7 +289,14 @@ List<GalleryDemo> _buildGalleryDemos() {
       routeName: TwoLevelListDemo.routeName,
       buildRoute: (BuildContext context) => new TwoLevelListDemo(),
     ),
-    
+    new GalleryDemo(
+      title: 'Expansion panels',
+      subtitle: 'A list of expanding panels',
+      icon: GalleryIcons.expand_all,
+      category: _kMaterialComponents,
+      routeName: ExpansionPanelDemo.routeName,
+      buildRoute: (BuildContext context) => new ExpansionPanelDemo(),
+    ),
 
 
     //Cupertino
