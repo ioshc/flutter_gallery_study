@@ -8,9 +8,10 @@ enum DismissDialogAction {
 }
 
 class _TimeFormField extends StatelessWidget {
-  const _TimeFormField({this.labelText, this.timeText, this.onTap});
+  const _TimeFormField({this.labelText, this.helperText, this.timeText, this.onTap});
 
   final String labelText;
+  final String helperText;
   final String timeText;
   final VoidCallback onTap;
 
@@ -21,6 +22,7 @@ class _TimeFormField extends StatelessWidget {
       child: new InputDecorator(
         decoration: new InputDecoration(
           labelText: labelText,
+          helperText: helperText,
         ),
         child: new Row(
           children: <Widget>[
@@ -38,6 +40,7 @@ class _TimeFormField extends StatelessWidget {
 class _Dropdown extends StatelessWidget {
   const _Dropdown({
     this.labelText,
+    this.helperText,
     this.selectedDate,
     this.selectedTime,
     this.selectDate,
@@ -45,6 +48,7 @@ class _Dropdown extends StatelessWidget {
   });
 
   final String labelText;
+  final String helperText;
   final DateTime selectedDate;
   final TimeOfDay selectedTime;
   final ValueChanged<DateTime> selectDate;
@@ -59,6 +63,7 @@ class _Dropdown extends StatelessWidget {
           flex: 3,
           child: new _TimeFormField(
             labelText: labelText,
+            helperText: helperText,
             timeText: new DateFormat('EEE, MMM d yyyy').format(selectedDate),
             onTap: () {
               showDatePicker(
@@ -108,6 +113,7 @@ class _FullScreenDialogDemoState extends State<FullScreenDialogDemo> {
   TimeOfDay _fromTime = TimeOfDay.now();
   DateTime _toDate = DateTime(2018, 8, 4);
   TimeOfDay _toTime = TimeOfDay.now();
+  bool _checked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -190,6 +196,22 @@ class _FullScreenDialogDemoState extends State<FullScreenDialogDemo> {
                     _toTime = value;
                   });
                 },
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              new InputDecorator(
+                decoration: new InputDecoration(),
+                child: new Row(
+                  children: <Widget>[
+                    new Checkbox(value: _checked, onChanged: (value){
+                      setState(() {
+                        _checked = !_checked;
+                      });
+                    }),
+                    const Text('All day'),
+                  ],
+                ),
               ),
             ],
           ),
