@@ -97,6 +97,18 @@ List<GalleryDemo> _buildGalleryDemos() {
 
 
 
+    //Studies
+    new GalleryDemo(
+      title: 'Contact profile',
+      subtitle: 'Address book entry with a flexible appbar',
+      icon: Icons.perm_contact_calendar,
+      category: _kDemos,
+      routeName: ContactDemo.routeName,
+      buildRoute: (BuildContext context) => new ContactDemo(),
+    ),
+
+
+
     //Material
     new GalleryDemo(
       title: 'Backdrop',
@@ -451,7 +463,7 @@ List<GalleryDemo> _buildGalleryDemos() {
         icon: Icons.adjust,
         category: _kDemos,
         routeName: PestoDemo.routeName,
-        buildRoute: (BuildContext context) => const PestoDemo(),
+        buildRoute: (BuildContext context) => new PestoDemo(),
       ),
     );
     return true;
