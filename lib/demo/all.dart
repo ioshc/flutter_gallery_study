@@ -6,3 +6,4 @@ export 'video_demo.dart';
 export 'cupertino/cupertino.dart';
 export 'material/material.dart';
 export 'contact_demo.dart';
+export 'shrine_demo.dart';

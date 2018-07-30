@@ -106,6 +106,14 @@ List<GalleryDemo> _buildGalleryDemos() {
       routeName: ContactDemo.routeName,
       buildRoute: (BuildContext context) => new ContactDemo(),
     ),
+    new GalleryDemo(
+      title: 'Shrine',
+      subtitle: 'Basic shopping app',
+      icon: GalleryIcons.shrine,
+      category: _kDemos,
+      routeName: ShrineDemo.routeName,
+      buildRoute: (BuildContext context) => new ShrineDemo(),
+    ),
 
 
 
